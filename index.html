@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>森生不息｜SDGs 15 森林議題認識兩天一夜活動</title>
+  <meta name="description" content="以 SDGs 15 陸域生命為核心，結合森林導覽、保育宣講、再生紙製作與天然染料繪畫競賽的兩天一夜森林議題認識活動。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --forest:#0f2f24;
+      --forest-2:#174c35;
+      --moss:#4f7f52;
+      --leaf:#83b56b;
+      --mint:#dcefd8;
+      --cream:#f7f3e8;
+      --paper:#fffaf0;
+      --earth:#a36b3f;
+      --gold:#d7a84b;
+      --ink:#1c2923;
+      --muted:#67746d;
+      --shadow:0 22px 70px rgba(8,29,20,.18);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Noto Sans TC',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(131,181,107,.25), transparent 34rem),
+        linear-gradient(180deg,#f8f6ed 0%,#edf4e8 45%,#f7f3e8 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .noise{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.08;
+      z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    }
+    .nav{
+      position:fixed;
+      top:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1120px, calc(100% - 28px));
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 16px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:999px;
+      background:rgba(15,47,36,.72);
+      backdrop-filter:blur(18px);
+      color:white;
+      box-shadow:0 12px 35px rgba(15,47,36,.2);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.04em}
+    .logo{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--leaf),#d9c46d);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+    .links{display:flex;gap:6px;align-items:center}
+    .links a{font-size:14px;padding:9px 12px;border-radius:999px;color:rgba(255,255,255,.86)}
+    .links a:hover{background:rgba(255,255,255,.12);color:#fff}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:800;border:0;cursor:pointer;transition:.25s ease;box-shadow:0 12px 24px rgba(15,47,36,.16)}
+    .btn-primary{background:linear-gradient(135deg,#d7a84b,#f2d47d);color:#2d2110}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 30px rgba(163,107,63,.22)}
+    .btn-ghost{background:rgba(255,255,255,.16);color:white;border:1px solid rgba(255,255,255,.26);box-shadow:none}
+
+    .hero{min-height:100svh;position:relative;isolation:isolate;display:grid;align-items:center;padding:118px 22px 70px;color:white;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;z-index:-3;background:linear-gradient(rgba(7,31,22,.58),rgba(7,31,22,.76)),url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=85') center/cover no-repeat;transform:scale(1.02)}
+    .hero::after{content:"";position:absolute;inset:auto -10% -1px;height:38%;z-index:-1;background:linear-gradient(180deg,transparent,#f8f6ed 72%)}
+    .hero-inner{width:min(1120px,100%);margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);font-weight:700;color:#eff8ec}
+    h1{font-family:'Noto Serif TC',serif;font-size:clamp(46px,8vw,92px);line-height:.98;letter-spacing:-.05em;margin:20px 0 18px;text-wrap:balance}
+    .hero p{font-size:clamp(17px,2.2vw,22px);line-height:1.9;color:rgba(255,255,255,.88);max-width:760px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+    .hero-card{border-radius:var(--radius);padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+    .hero-card h3{margin:0 0 18px;font-size:22px}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .stat{padding:18px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}
+    .stat b{display:block;font-size:30px;color:#f2d47d}
+    .stat span{color:rgba(255,255,255,.8);font-size:14px}
+
+    section{padding:86px 22px}
+    .wrap{width:min(1120px,100%);margin:auto}
+    .section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:30px}
+    .eyebrow{color:var(--moss);font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+    .section-head h2{font-family:'Noto Serif TC',serif;font-size:clamp(32px,5vw,54px);line-height:1.1;margin:8px 0;color:var(--forest)}
+    .section-head p{max-width:540px;color:var(--muted);line-height:1.8}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:rgba(255,250,240,.78);border:1px solid rgba(79,127,82,.16);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .card::before{content:"";position:absolute;right:-30px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(131,181,107,.16)}
+    .icon{font-size:34px}
+    .card h3{font-size:22px;margin:14px 0 10px;color:var(--forest)}
+    .card p,.card li{color:var(--muted);line-height:1.8}
+    .card ul{padding-left:1.2em;margin:10px 0 0}
+
+    .route{background:linear-gradient(180deg,#102f24,#173d2c);color:white;position:relative;overflow:hidden}
+    .route::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 20%,rgba(215,168,75,.18),transparent 22rem),radial-gradient(circle at 90% 70%,rgba(131,181,107,.19),transparent 24rem)}
+    .route .wrap{position:relative}
+    .route .section-head h2,.route .eyebrow{color:white}
+    .route .section-head p{color:rgba(255,255,255,.72)}
+
+    /* 修正重點：垂直線放在圓點後方，並延伸到上下 */
+    .timeline{position:relative;margin-top:28px;isolation:isolate}
+    .timeline::before{content:"";position:absolute;left:24px;top:-28px;bottom:-28px;width:3px;background:linear-gradient(180deg,var(--gold),var(--leaf));border-radius:999px;z-index:0}
+    .stop{display:grid;grid-template-columns:70px 1fr;gap:18px;margin:0 0 18px;position:relative;z-index:1}
+    .dot{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--leaf));display:grid;place-items:center;font-weight:900;color:#173d2c;box-shadow:0 0 0 8px rgba(255,255,255,.08);position:relative;z-index:2}
+    .dot::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:rgba(131,181,107,.16);z-index:-1}
+    .stop-card{padding:22px;border-radius:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px)}
+    .stop-card h3{margin:0 0 8px;font-size:21px}
+    .stop-card p{margin:0;color:rgba(255,255,255,.76);line-height:1.8}
+    .tag{display:inline-flex;margin-top:12px;padding:6px 10px;border-radius:999px;background:rgba(215,168,75,.18);color:#ffe3a0;font-weight:700;font-size:13px}
+
+    .schedule-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+    .tab{padding:11px 16px;border-radius:999px;border:1px solid rgba(79,127,82,.22);background:#fffaf0;font-weight:800;cursor:pointer;color:var(--forest)}
+    .tab.active{background:var(--forest);color:white}
+    .schedule{display:none}
+    .schedule.active{display:block}
+    .time-table{width:100%;border-collapse:separate;border-spacing:0 12px}
+    .time-table th{text-align:left;color:var(--moss);font-size:14px;padding:0 16px}
+    .time-table td{background:rgba(255,250,240,.8);padding:18px 16px;border-top:1px solid rgba(79,127,82,.12);border-bottom:1px solid rgba(79,127,82,.12);vertical-align:top}
+    .time-table td:first-child{border-left:1px solid rgba(79,127,82,.12);border-radius:18px 0 0 18px;font-weight:900;color:var(--forest);white-space:nowrap}
+    .time-table td:last-child{border-right:1px solid rgba(79,127,82,.12);border-radius:0 18px 18px 0;color:var(--muted)}
+
+    .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:22px;align-items:stretch}
+    .panel{background:#fffaf0;border:1px solid rgba(79,127,82,.16);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+    .panel h3{margin-top:0;color:var(--forest);font-size:26px}
+    .score{display:grid;gap:12px}
+    .score-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 16px;background:#f2f0df;border-radius:16px}
+    .score-row b{color:var(--forest)}
+    .score-row span{font-weight:900;color:var(--earth)}
+    .awards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .award{padding:20px;border-radius:24px;background:linear-gradient(180deg,#fffaf0,#efe7cd);border:1px solid rgba(215,168,75,.28);text-align:center}
+    .award .medal{font-size:32px}
+    .award b{display:block;color:var(--forest);margin:8px 0}
+    .award span{font-weight:900;color:var(--earth)}
+
+    .apply{background:linear-gradient(135deg,#f4ead3,#e7f1df)}
+    .apply-box{display:grid;grid-template-columns:1fr .95fr;gap:24px;align-items:center;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.7);border-radius:34px;padding:34px;box-shadow:var(--shadow)}
+    .form-frame{height:720px;border:0;width:100%;border-radius:24px;background:white;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+    .form-placeholder{height:560px;border-radius:24px;background:linear-gradient(135deg,#183a2b,#0f2f24);color:white;display:grid;place-items:center;text-align:center;padding:28px}
+    .form-placeholder h3{font-size:26px;margin:0 0 10px}
+    .form-placeholder code{display:block;margin-top:14px;white-space:normal;background:rgba(255,255,255,.12);padding:12px;border-radius:14px;color:#f2d47d}
+    .notice{padding:16px 18px;border-radius:20px;background:#fffaf0;border-left:5px solid var(--gold);color:var(--muted);line-height:1.8}
+    footer{padding:36px 22px;background:#0f2f24;color:rgba(255,255,255,.75);text-align:center}
+
+    @media(max-width:900px){
+      .links{display:none}
+      .hero-inner,.split,.apply-box{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .awards{grid-template-columns:repeat(2,1fr)}
+      .section-head{display:block}
+      .time-table{font-size:14px}
+      .time-table th:nth-child(3),.time-table td:nth-child(3){display:none}
+      .hero-card{max-width:560px}
+      .nav{top:10px}
+    }
+    @media(max-width:520px){
+      section{padding:64px 16px}
+      .hero{padding-left:16px;padding-right:16px}
+      .awards{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .time-table td{padding:14px 10px}
+      .btn{width:100%}
+    }
+  
+    footer a{color:#f2d47d;text-decoration:underline;text-underline-offset:3px}
+    footer a:hover{color:#fff}
+
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <nav class="nav" aria-label="主選單">
+    <a class="brand" href="#top"><span class="logo">🌿</span><span>森生不息</span></a>
+    <div class="links">
+      <a href="#about">活動理念</a>
+      <a href="#route">路線</a>
+      <a href="#schedule">行程</a>
+      <a href="#competition">競賽</a>
+      <a href="#apply">報名</a>
+    </div>
+    <a class="btn btn-primary" href="#apply">立即報名</a>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="kicker">SDGs 15 陸域生命｜森林議題認識</span>
+        <h1>走進森林，<br />把永續種進生活。</h1>
+        <p>兩天一夜從高科大楠梓校區出發，前往台東知本工作站、鸞山森林博物館與中華紙漿台東廠，透過森林保育宣講、生態導覽、再生紙製作與天然染料創作，讓大家真正理解森林面臨的問題，並思考如何在生活中守護森林。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#schedule">查看完整行程</a>
+          <a class="btn btn-ghost" href="#route">探索活動路線</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="活動重點資訊">
+        <h3>活動快速資訊</h3>
+        <div class="stats">
+          <div class="stat"><b>7/13</b><span>第一天出發與森林導覽</span></div>
+          <div class="stat"><b>7/14</b><span>再生紙體驗與競賽</span></div>
+          <div class="stat"><b>60</b><span>正取名額</span></div>
+          <div class="stat"><b>免費</b><span>全程免費參加</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">About</div>
+            <h2>以森林為教室，理解永續的真正意義</h2>
+          </div>
+          <p>本活動以 SDGs 15「保護、恢復及促進陸域生態系統永續利用」為核心，將環境教育、森林保育議題、文化理解與資源循環結合，讓參與者不只是參與活動，而是能真正看見森林面臨的問題，理解生物多樣性、盜伐、外來種、棲地破壞與資源消耗之間的關聯。</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><div class="icon">🌲</div><h3>森林保育宣講</h3><p>於農業部林業及自然保育署臺東分署知本工作站，認識生物多樣性、森林防災、防範盜伐、外來種防治與林木健康等森林議題。</p></article>
+          <article class="card"><div class="icon">🦅</div><h3>鸞山森林踏查</h3><p>由阿力曼老師帶領走進森林，理解原始林保護、布農族山林智慧，以及人類與自然和諧共存的價值。</p></article>
+          <article class="card"><div class="icon">📜</div><h3>再生紙與天然染料</h3><p>在中華紙漿台東廠進行再生紙製作與植物天然染料繪畫，將森林記憶轉化為環境友善的藝術作品。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="route" class="route">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Route</div><h2>活動路線｜從校園出發，深入台東森林</h2></div>
+          <p>全程搭乘團體車輛移動，降低自行交通風險，提升團體安全與行程效率。</p>
+        </div>
+        <div class="timeline">
+          <div class="stop"><div class="dot">1</div><div class="stop-card"><h3>國立高雄科技大學楠梓校區</h3><p>集合、點名、行前說明，搭乘豪華中巴出發。</p><span class="tag">集合起點</span></div></div>
+          <div class="stop"><div class="dot">2</div><div class="stop-card"><h3>台東南興休息站</h3><p>中途休息 30 分鐘，調整狀態後繼續前往午餐地點。</p><span class="tag">補給休息</span></div></div>
+          <div class="stop"><div class="dot">3</div><div class="stop-card"><h3>回家食間－台東拿手菜</h3><p>第一天團體午餐，為下午森林課程補充能量。</p><span class="tag">午餐</span></div></div>
+          <div class="stop"><div class="dot">4</div><div class="stop-card"><h3>知本工作站</h3><p>森林保育宣講：認識森林破壞、生態保育與日常永續行動。</p><span class="tag">森林保育</span></div></div>
+          <div class="stop"><div class="dot">5</div><div class="stop-card"><h3>鸞山森林博物館</h3><p>森林導覽與生態體驗，觀察自然棲地並理解文化傳承。</p><span class="tag">森林踏查</span></div></div>
+          <div class="stop"><div class="dot">6</div><div class="stop-card"><h3>台東桂田喜來登酒店</h3><p>入住休息，晚餐安排於台東市區或夜市自行享用。</p><span class="tag">住宿</span></div></div>
+          <div class="stop"><div class="dot">7</div><div class="stop-card"><h3>中華紙漿股份有限公司台東廠</h3><p>第二天進行再生紙製作、天然染料繪畫、作品評分與頒獎。</p><span class="tag">實作與競賽</span></div></div>
+          <div class="stop"><div class="dot">8</div><div class="stop-card"><h3>返回高科大楠梓校區</h3><p>完成森林宣言與合照後回程，將永續行動帶回日常。</p><span class="tag">活動結束</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Schedule</div><h2>兩日活動行程</h2></div>
+          <p>清楚掌握每個時段、地點與活動內容，讓參與者在報名前就能完整了解體驗流程。</p>
+        </div>
+        <div class="schedule-tabs">
+          <button class="tab active" type="button" data-tab="day1">7月13日｜森林導覽日</button>
+          <button class="tab" type="button" data-tab="day2">7月14日｜再生紙創作日</button>
+        </div>
+        <div id="day1" class="schedule active">
+          <table class="time-table">
+            <thead><tr><th>時間</th><th>活動內容</th><th>地點 / 備註</th></tr></thead>
+            <tbody>
+              <tr><td>07:00–07:30</td><td>集合、點名、行前說明</td><td>高科大楠梓校區｜確認人員到齊</td></tr>
+              <tr><td>07:30–09:00</td><td>搭乘豪華中巴出發前往台東</td><td>團體移動</td></tr>
+              <tr><td>09:00–09:30</td><td>中途休息</td><td>台東南興休息站｜休息 30 分鐘</td></tr>
+              <tr><td>11:00–13:00</td><td>團體午餐</td><td>回家食間－台東拿手菜</td></tr>
+              <tr><td>13:30–14:30</td><td>森林保育宣講</td><td>知本工作站｜森林保育與森林重要性</td></tr>
+              <tr><td>15:30–17:30</td><td>森林導覽與生態體驗</td><td>鸞山森林博物館｜阿力曼老師導覽</td></tr>
+              <tr><td>18:20 起</td><td>入住飯店、晚餐自行享用</td><td>台東桂田喜來登酒店 / 台東市區或夜市</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="day2" class="schedule">
+          <table class="time-table">
+            <thead><tr><th>時間</th><th>活動內容</th><th>地點 / 備註</th></tr></thead>
+            <tbody>
+              <tr><td>07:00–08:30</td><td>飯店自助早餐、整理行李</td><td>台東桂田喜來登酒店</td></tr>
+              <tr><td>08:30–08:50</td><td>出發前往中華紙漿台東廠</td><td>團體移動</td></tr>
+              <tr><td>08:50–09:20</td><td>再生紙製作流程說明</td><td>廠內人員介紹</td></tr>
+              <tr><td>09:20–11:00</td><td>再生紙製作實作體驗</td><td>大家親自操作</td></tr>
+              <tr><td>11:00–11:30</td><td>天然染料繪畫說明</td><td>說明主題與評分方式</td></tr>
+              <tr><td>11:30–13:00</td><td>午餐</td><td>發放便當</td></tr>
+              <tr><td>13:00–14:00</td><td>天然染料繪畫創作</td><td>使用再生紙與植物天然染料</td></tr>
+              <tr><td>14:00–14:30</td><td>作品評分與頒獎典禮</td><td>由美術專家評分</td></tr>
+              <tr><td>14:30–15:00</td><td>森林宣言、活動總結、合照</td><td>活動收尾</td></tr>
+              <tr><td>15:00 起</td><td>回程</td><td>返回高科大楠梓校區</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="competition">
+      <div class="wrap split">
+        <div class="panel">
+          <div class="eyebrow">Competition</div>
+          <h3>再生紙上的森林記憶</h3>
+          <p style="color:var(--muted);line-height:1.9">競賽主題為「我眼中的森林與永續未來」。參與者使用親手製作的再生紙與植物天然染料，將兩日活動中對森林、生態與永續的學習成果轉化為藝術作品。</p>
+          <div class="score">
+            <div class="score-row"><b>主題表現</b><span>25分</span></div>
+            <div class="score-row"><b>活動連結性</b><span>25分</span></div>
+            <div class="score-row"><b>創意構想</b><span>25分</span></div>
+            <div class="score-row"><b>染料運用</b><span>15分</span></div>
+            <div class="score-row"><b>整體美感</b><span>10分</span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>競賽獎勵</h3>
+          <div class="awards">
+            <div class="award"><div class="medal">🥇</div><b>森林守護金獎</b><span>15,000元</span></div>
+            <div class="award"><div class="medal">🥈</div><b>森林守護銀獎</b><span>10,000元</span></div>
+            <div class="award"><div class="medal">🥉</div><b>森林守護銅獎</b><span>7,000元</span></div>
+            <div class="award"><div class="medal">🌱</div><b>最佳學習獎</b><span>5,000元</span></div>
+            <div class="award"><div class="medal">✨</div><b>最佳創意獎</b><span>3,000元</span></div>
+          </div>
+          <p class="notice" style="margin-top:18px">優秀作品可於活動成果報告、簡報或展覽中展示，讓森林保育理念持續被看見。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="target">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Apply Info</div><h2>活動對象與錄取方式</h2></div>
+          <p>活動對象為國立高雄科技大學學生，採人工篩選制，依報名者參加動機與活動理解程度審核。</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><div class="icon">👥</div><h3>錄取名額</h3><ul><li>正取 60 名</li><li>備取 30 名</li><li>錄取後隨機分組，每組 6 人</li></ul></article>
+          <article class="card"><div class="icon">📝</div><h3>審核重點</h3><ul><li>參加動機明確度</li><li>活動理解程度</li><li>學習意願與全程配合度</li><li>活動後實踐與分享意願</li></ul></article>
+          <article class="card"><div class="icon">🎟️</div><h3>活動免費</h3><p>本活動全程免費參加。錄取者請依主辦單位通知完成報名確認，並配合兩天一夜行程與活動規範。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply" class="apply">
+      <div class="wrap apply-box">
+        <div>
+          <div class="eyebrow">Registration</div>
+          <h2 style="font-family:'Noto Serif TC',serif;font-size:clamp(32px,5vw,52px);line-height:1.12;color:var(--forest);margin:10px 0 14px">準備好一起守護森林了嗎？</h2>
+          <p style="color:var(--muted);line-height:1.9;font-size:17px">本活動全程免費，包含行程安排、森林保育宣講、森林問題認識、環境教育學習與再生紙創作活動。活動目的不是單純體驗，而是讓參與者真正理解森林正在面臨的問題，並思考日常生活能如何回應。請於右側 Google 表單填寫報名資料與參加動機；若表單載入較慢，可點選下方按鈕另開表單填寫。</p>
+          <div class="notice"><b>活動費用：</b>本活動免費參加。正取者須依通知完成報名確認；若主辦單位另有保證金或出席確認流程，將於錄取通知中說明。</div>
+          <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScpb4GFWmqUAveQzmJg8Ia0RhETJcMqQjgUubbXcbeyrhJP9Q/viewform?usp=header" target="_blank" rel="noopener">開啟報名表單</a>
+            <a class="btn" style="background:white;color:var(--forest)" href="#schedule">再次查看行程</a>
+          </div>
+        </div>
+        <div id="google-form-slot" data-form-url="https://docs.google.com/forms/d/e/1FAIpQLScpb4GFWmqUAveQzmJg8Ia0RhETJcMqQjgUubbXcbeyrhJP9Q/viewform?embedded=true"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>森生不息｜SDGs 15 森林議題認識兩天一夜活動</p>
+    <p style="font-size:13px;opacity:.85;line-height:1.9">
+      協辦單位：
+      <a href="http://www.chp.com.tw" target="_blank" rel="noopener">台灣區造紙工業同業公會</a>、
+      <a href="http://www.forestculturemuseum.com.tw/about.html" target="_blank" rel="noopener">鸞山森林博物館</a>、
+      <a href="https://taitung.forest.gov.tw/0001175" target="_blank" rel="noopener">農業部林業及自然保育署臺東分署</a>
+    </p>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const schedules = document.querySelectorAll('.schedule');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = document.getElementById(tab.dataset.tab);
+        if (!target) return;
+
+        tabs.forEach((item) => item.classList.remove('active'));
+        schedules.forEach((item) => item.classList.remove('active'));
+        tab.classList.add('active');
+        target.classList.add('active');
+      });
+    });
+
+    const slot = document.getElementById('google-form-slot');
+    const formUrl = slot.dataset.formUrl;
+
+    if (formUrl && formUrl !== 'GOOGLE_FORM_EMBED_URL') {
+      const iframe = document.createElement('iframe');
+      iframe.className = 'form-frame';
+      iframe.src = formUrl;
+      iframe.loading = 'lazy';
+      iframe.title = '活動報名 Google 表單';
+      slot.appendChild(iframe);
+    } else {
+      slot.innerHTML = `
+        <div class="form-placeholder">
+          <div>
+            <h3>Google 表單嵌入區</h3>
+            <p>將你的 Google 表單 iframe src 貼入 HTML 後，表單會顯示在這裡。</p>
+            <code>data-form-url="https://docs.google.com/forms/d/e/1FAIpQLScpb4GFWmqUAveQzmJg8Ia0RhETJcMqQjgUubbXcbeyrhJP9Q/viewform?embedded=true"</code>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
